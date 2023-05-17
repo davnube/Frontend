@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ValueBoolean } from './value-boolean';
+import { ValueBoolean } from '../../dto/value-boolean';
 
 @Injectable()
 export class BackupDBService {
@@ -16,5 +16,5 @@ export class BackupDBService {
      this.data = this.http.get<ValueBoolean>(this.urlEndPoint);
     return this.data;
   }
-  
+
 }

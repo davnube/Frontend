@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
-import { BackupDBService } from 'src/app/services/backup-db.service';
-import { ValueBoolean } from 'src/app/services/value-boolean';
+import { BackupDBService } from 'src/app/services/recovery/backup-db.service';
+import { ValueBoolean } from 'src/app/dto/value-boolean';
 
 
 @Component({
   selector: 'app-backup-db',
-  templateUrl: './backup-db.component.html',
-  styleUrls: ['./backup-db.component.css']
+  templateUrl: './backup-db.component.html'
 })
 export class BackupDBComponent {
 
@@ -25,9 +24,9 @@ export class BackupDBComponent {
         this.mensaje = 'Error';
       }
     });
-    
 
-    
+
+
    // console.log(this.backupDBService.getBackupDB().subscribe());
   }
 
