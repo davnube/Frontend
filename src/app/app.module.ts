@@ -15,6 +15,10 @@ import { CreateUserComponent } from './commons/forms/create-user/create-user.com
 import { EstudianteComponent } from './commons/forms/create-user/estudiante/estudiante.component';
 import { PadresComponent } from './commons/forms/create-user/padres/padres.component';
 import { ProfesorComponent } from './commons/forms/create-user/profesor/profesor.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { BusquedaTipoUserComponent } from './commons/forms/create-user/busqueda-tipo-user/busqueda-tipo-user.component';
 
 // const routes: Routes = [
 //   {path: '', redirectTo: '/usuarios', pathMatch: 'full'},
@@ -31,7 +35,8 @@ import { ProfesorComponent } from './commons/forms/create-user/profesor/profesor
     CreateUserComponent,
     EstudianteComponent,
     PadresComponent,
-    ProfesorComponent
+    ProfesorComponent,
+    BusquedaTipoUserComponent
 
   ],
   imports: [
@@ -39,6 +44,10 @@ import { ProfesorComponent } from './commons/forms/create-user/profesor/profesor
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatDatepickerModule,
+    MatFormFieldModule
+
     // RouterModule.forRoot(routes)
   ],
   providers: [

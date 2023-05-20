@@ -1,1 +1,25 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-5">
+      <h1 class="mb-4 text-center">{{getTitle()}}</h1>
+      <form>
 <app-create-user></app-create-user>
+<div class="col-12">
+  <label for="curp" class="form-label">Curp:</label>
+  <input type="text" class="form-control" id="curp" name="curp">
+</div>
+<div class="col-12">
+  <label for="birthday" class="form-label">Fecha de nacimiento:</label>
+  <input class="form-control" type="date" id="birthday" name="birthday" min="1960-01-01" [max]="minDate"  [value]="minDate">
+</div>
+<div class="col-12 mt-2">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <button type="submit" class="btn btn-dark w-100 fw-bold">Enviar</button>
+    </div>
+  </div>
+</div>
+</form>
+</div>
+</div>
+</div>
