@@ -19,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { BusquedaTipoUserComponent } from './commons/forms/create-user/busqueda-tipo-user/busqueda-tipo-user.component';
+import { RolesService } from './services/catalog/roles.service';
 
 // const routes: Routes = [
 //   {path: '', redirectTo: '/usuarios', pathMatch: 'full'},
@@ -52,7 +53,8 @@ import { BusquedaTipoUserComponent } from './commons/forms/create-user/busqueda-
   ],
   providers: [
     CategoriesService,
-    BackupDBService
+    BackupDBService,
+    RolesService
   ],
   bootstrap: [AppComponent]
 })
