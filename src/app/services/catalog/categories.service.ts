@@ -12,4 +12,5 @@ export class CategoriesService {
   getCategories(): Observable<ValueLabel[]>{
     return this.http.get<ValueLabel[]>(this.urlEndPoint);
   }
+
 }

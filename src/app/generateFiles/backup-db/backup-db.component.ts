@@ -24,10 +24,6 @@ export class BackupDBComponent {
         this.mensaje = 'Error';
       }
     });
-
-
-
-   // console.log(this.backupDBService.getBackupDB().subscribe());
   }
 
   clickItem(){

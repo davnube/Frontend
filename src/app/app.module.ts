@@ -16,15 +16,24 @@ import { EstudianteComponent } from './commons/forms/create-user/estudiante/estu
 import { PadresComponent } from './commons/forms/create-user/padres/padres.component';
 import { ProfesorComponent } from './commons/forms/create-user/profesor/profesor.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { BusquedaTipoUserComponent } from './commons/forms/create-user/busqueda-tipo-user/busqueda-tipo-user.component';
 import { RolesService } from './services/catalog/roles.service';
+import { TeacherComponent } from './commons/forms/create-user/busqueda-tipo-user/teacher/teacher.component';
+import { ListTeacherBySearchService } from './services/catalog/list-teacher-by-search.service';
+import { LoginComponent } from './commons/forms/login/login.component';
+import { HomeComponent } from './commons/home/home.component';
+import { HeaderControlComponent } from './commons/control/header-control/header-control.component';
 
-// const routes: Routes = [
-//   {path: '', redirectTo: '/usuarios', pathMatch: 'full'},
-//   // {path: 'usuarios', component: UsersComponent}
-// ]
+const routes: Routes = [
+  { path: '', redirectTo:'/home', pathMatch: 'full'},
+  { path: 'home', component: HomeComponent},
+  { path: 'login', component: LoginComponent},
+  { path: 'headerControl', component: HeaderControlComponent},
+  { path: 'busquedaUser', component: BusquedaTipoUserComponent}
+
+];
 
 @NgModule({
   declarations: [
@@ -37,8 +46,11 @@ import { RolesService } from './services/catalog/roles.service';
     EstudianteComponent,
     PadresComponent,
     ProfesorComponent,
-    BusquedaTipoUserComponent
-
+    BusquedaTipoUserComponent,
+    TeacherComponent,
+    LoginComponent,
+    HomeComponent,
+    HeaderControlComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,15 +59,15 @@ import { RolesService } from './services/catalog/roles.service';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatDatepickerModule,
-    MatFormFieldModule
-
-    // RouterModule.forRoot(routes)
+    MatFormFieldModule,
+    RouterModule.forRoot(routes),
   ],
   providers: [
     CategoriesService,
     BackupDBService,
-    RolesService
+    RolesService,
+    ListTeacherBySearchService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,20 +1,45 @@
 <div class="container text-center">
-  <h1 class="mb-4 text-center">Selecciona la opción que deceas realizar</h1>
-  <h4 class="mb-4 text-center">Los criterios para realizar una busqueda son los aiguientes:</h4>
-  <h5 class="mb-4 text-center">Nombre, Apellido Paterno, Apellido Materno ó Curp</h5>
+  <h1 class="mb-4 text-center">Selecciona la opción que deceas realizar {{title}}</h1>
+  <h4 class="mb-4 text-center">
+    Los criterios para realizar una busqueda son los aiguientes:
+  </h4>
+  <h5 class="mb-4 text-center">
+    Nombre, Apellido Paterno, Apellido Materno ó Curp
+  </h5>
   <div class="row justify-content-center">
-    <form action="" class="row col-sm-4">
-    <div class="col-sm-7">
-      <input class="form-control" type="search" placeholder="search" aria-label="search">
+    <form action="" class="row col-sm-6">
+      <div class="col-sm-7">
+        <input class="form-control" type="search" placeholder="search" aria-label="search" name="search" [(ngModel)]="search"/>
+      </div>
+    </form>
+    <div class="row col-sm-3">
+      <div class="col-sm-11">
+        <input type="button" class="form-control btn btn-outline-primary" id="alta" name="alta" value="Alta"/>
+      </div>
     </div>
-    <div class="col-sm-5">
-      <input type="submit" class="form-control btn btn-outline-success" id="buscar" name="buscar">
-    </div>
-  </form>
-  <div class="row col-sm-2">
-    <div class="col-sm-11">
-      <input type="button" class="form-control btn btn-outline-primary" id="alta" name="alta" value="Alta">
-    </div>
-  </div>
   </div>
 </div>
+<div class="container text-center mt-2">
+  <div class="row justify-content-center">
+    <h6>Listado de usuarios</h6>
+    <table class="border">
+      <thead>
+        <tr>
+          <th>Nombre:</th>
+          <th>Apellido paterno:</th>
+          <th>Apellido materno:</th>
+          <th>Curp:</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{user.name}}</td>
+          <td>{{user.lastName}}</td>
+          <td>{{user.mothersLastName}}</td>
+          <td>{{user.curp}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<app-teacher [search]="search" (listadoUsuarios)="listadoUsuarios($event)" [value]="value"></app-teacher>

@@ -8,7 +8,7 @@ export class BackupDBService {
 
   private urlEndPoint: string = 'http://localhost:5002/reinscripcion/catalog/recovery';
 
-  private data! : Observable<ValueBoolean>;
+  private data : Observable<ValueBoolean>;
 
   constructor( private http: HttpClient) { }
 
