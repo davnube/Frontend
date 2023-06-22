@@ -9,11 +9,12 @@ import {
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { UsuarioBasicoDTO } from 'src/app/dto/usuario-basico-dto';
+import { ListStudentBySearchService } from 'src/app/services/catalog/list-student-by-search.service';
 import { ListTeacherBySearchService } from 'src/app/services/catalog/list-teacher-by-search.service';
 
 @Component({
-  selector: 'app-teacher',
-  templateUrl: './teacher.component.html',
+  selector: 'app-search-data',
+  templateUrl: './search-data.component.html',
 })
 export class TeacherComponent implements OnChanges, OnInit {
   @Output() listadoUsuarios = new EventEmitter<UsuarioBasicoDTO[]>();
@@ -28,9 +29,16 @@ export class TeacherComponent implements OnChanges, OnInit {
 
   suscription: Subscription;
 
-  constructor(private listTeacherBySearchService: ListTeacherBySearchService) {}
+  constructor(private listTeacherBySearchService: ListTeacherBySearchService, private listStudentBySearchService: ListStudentBySearchService) {}
   ngOnInit(): void {
     if (this.value == 1) {
+      this.listStudentBySearchService.setSearch('');
+      this.listStudentBySearchService.setNoPag(0);
+
+      this.listStudentBySearchService.getTeacher().subscribe((response) => {
+        this.usuariosBasicoDTO = response.content as UsuarioBasicoDTO[];
+        this.listadoUsuarios.emit(this.usuariosBasicoDTO);
+      });
     } else {
       this.listTeacherBySearchService.setSearch('');
       this.listTeacherBySearchService.setNoPag(0);
@@ -44,6 +52,7 @@ export class TeacherComponent implements OnChanges, OnInit {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.value == 1) {
+      this.getUsersStudent(changes);
     } else {
       this.getUsersStudent(changes);
     }
@@ -53,9 +62,9 @@ export class TeacherComponent implements OnChanges, OnInit {
   getUsersTeacher(changes: SimpleChanges): void {
     if (changes['search'].currentValue != undefined) {
       this.data = changes['search'].currentValue;
-      this.listTeacherBySearchService.setSearch(this.data);
-      this.listTeacherBySearchService.setNoPag(0);
-      this.listTeacherBySearchService.getTeacher().subscribe((response) => {
+      this.listStudentBySearchService.setSearch(this.data);
+      this.listStudentBySearchService.setNoPag(0);
+      this.listStudentBySearchService.getTeacher().subscribe((response) => {
         this.usuariosBasicoDTO = response.content as UsuarioBasicoDTO[];
         this.listadoUsuarios.emit(this.usuariosBasicoDTO);
       });

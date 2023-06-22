@@ -20,18 +20,21 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BusquedaTipoUserComponent } from './commons/forms/create-user/busqueda-tipo-user/busqueda-tipo-user.component';
 import { RolesService } from './services/catalog/roles.service';
-import { TeacherComponent } from './commons/forms/create-user/busqueda-tipo-user/teacher/teacher.component';
+import { TeacherComponent } from './commons/forms/create-user/busqueda-tipo-user/search-data/search-data.component';
 import { ListTeacherBySearchService } from './services/catalog/list-teacher-by-search.service';
 import { LoginComponent } from './commons/forms/login/login.component';
 import { HomeComponent } from './commons/home/home.component';
 import { HeaderControlComponent } from './commons/control/header-control/header-control.component';
+import { ListStudentBySearchService } from './services/catalog/list-student-by-search.service';
 
 const routes: Routes = [
   { path: '', redirectTo:'/home', pathMatch: 'full'},
   { path: 'home', component: HomeComponent},
   { path: 'login', component: LoginComponent},
   { path: 'headerControl', component: HeaderControlComponent},
-  { path: 'busquedaUser', component: BusquedaTipoUserComponent}
+  { path: 'busquedaUser', component: BusquedaTipoUserComponent},
+  { path: 'estudiante', component:EstudianteComponent},
+  { path: 'profesor', component:ProfesorComponent},
 
 ];
 
@@ -67,6 +70,7 @@ const routes: Routes = [
     BackupDBService,
     RolesService,
     ListTeacherBySearchService,
+    ListStudentBySearchService
   ],
   bootstrap: [AppComponent],
 })

@@ -13,8 +13,11 @@
       </div>
     </form>
     <div class="row col-sm-3">
-      <div class="col-sm-11">
-        <input type="button" class="form-control btn btn-outline-primary" id="alta" name="alta" value="Alta"/>
+      <div class="col-sm-11" *ngIf="value == 1">
+        <input type="button" class="form-control btn btn-outline-primary" id="alta" name="alta" value="Alta" [routerLink]="['/estudiante']"/>
+      </div>
+      <div class="col-sm-11" *ngIf="value == 2">
+        <input type="button" class="form-control btn btn-outline-primary" id="alta" name="alta" value="Alta" [routerLink]="['/profesor']"/>
       </div>
     </div>
   </div>
@@ -42,4 +45,4 @@
     </table>
   </div>
 </div>
-<app-teacher [search]="search" (listadoUsuarios)="listadoUsuarios($event)" [value]="value"></app-teacher>
+<app-search-data [search]="search" (listadoUsuarios)="listadoUsuarios($event)" [value]="value"></app-search-data>
