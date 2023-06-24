@@ -11,7 +11,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { BackupDBComponent } from './generateFiles/backup-db/backup-db.component';
 import { BackupDBService } from './services/recovery/backup-db.service';
-import { CreateUserComponent } from './commons/forms/create-user/create-user.component';
 import { EstudianteComponent } from './commons/forms/create-user/estudiante/estudiante.component';
 import { PadresComponent } from './commons/forms/create-user/padres/padres.component';
 import { ProfesorComponent } from './commons/forms/create-user/profesor/profesor.component';
@@ -20,12 +19,13 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BusquedaTipoUserComponent } from './commons/forms/create-user/busqueda-tipo-user/busqueda-tipo-user.component';
 import { RolesService } from './services/catalog/roles.service';
-import { TeacherComponent } from './commons/forms/create-user/busqueda-tipo-user/search-data/search-data.component';
+import { SearchData } from './commons/forms/create-user/busqueda-tipo-user/search-data/search-data.component';
 import { ListTeacherBySearchService } from './services/catalog/list-teacher-by-search.service';
 import { LoginComponent } from './commons/forms/login/login.component';
 import { HomeComponent } from './commons/home/home.component';
 import { HeaderControlComponent } from './commons/control/header-control/header-control.component';
 import { ListStudentBySearchService } from './services/catalog/list-student-by-search.service';
+import { InsertStudentServiceService } from './services/main/insert-student-service.service';
 
 const routes: Routes = [
   { path: '', redirectTo:'/home', pathMatch: 'full'},
@@ -45,12 +45,11 @@ const routes: Routes = [
     HeaderComponent,
     SectionComponent,
     BackupDBComponent,
-    CreateUserComponent,
     EstudianteComponent,
     PadresComponent,
     ProfesorComponent,
     BusquedaTipoUserComponent,
-    TeacherComponent,
+    SearchData,
     LoginComponent,
     HomeComponent,
     HeaderControlComponent,
@@ -70,7 +69,8 @@ const routes: Routes = [
     BackupDBService,
     RolesService,
     ListTeacherBySearchService,
-    ListStudentBySearchService
+    ListStudentBySearchService,
+    InsertStudentServiceService
   ],
   bootstrap: [AppComponent],
 })

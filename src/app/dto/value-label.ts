@@ -1,4 +1,4 @@
 export class ValueLabel {
-    value!: number;
-    label!: string;
+    public value!: number;
+    public label!: string;
 }

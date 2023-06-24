@@ -16,7 +16,7 @@ import { ListTeacherBySearchService } from 'src/app/services/catalog/list-teache
   selector: 'app-search-data',
   templateUrl: './search-data.component.html',
 })
-export class TeacherComponent implements OnChanges, OnInit {
+export class SearchData implements OnChanges, OnInit {
   @Output() listadoUsuarios = new EventEmitter<UsuarioBasicoDTO[]>();
 
   @Input() search: String;

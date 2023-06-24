@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PersonalDataDTO } from 'src/app/dto/personal-data-dto';
 import { ValueLabel } from 'src/app/dto/value-label';
 import { RolesService } from 'src/app/services/catalog/roles.service';
+import * as intlTelInput from 'intl-tel-input';
 
 @Component({
   selector: 'app-profesor',
@@ -9,46 +10,72 @@ import { RolesService } from 'src/app/services/catalog/roles.service';
 })
 export class ProfesorComponent implements OnInit {
 
-  roles! : ValueLabel[];
-
-  profesores!: PersonalDataDTO[];
-
   private title!: string;
-
+  name: string;
   minDate!: String;
-
-  maxDate!: Date;
-
+  private roleId: number;
+  private personalDataDTO: PersonalDataDTO;
+  curp:String;
+  birthday: String;
   currentDateSelect!: Date;
+  motherLastName!: String;
 
-  id!: number;
+  lastName!: String;
 
-  curp!: string;
+  phone!: String;
 
-  name!: string;
+  email!: String;
 
-  lastName!: string;
+  phoneHome!: String;
 
-  mothersLastName!: string;
+  constructor(private rolesService: RolesService) {
+  }
 
-  birthday!: string;
 
-  email!: string;
+  createUser(curp:HTMLInputElement){
+    console.log(this.name);
+    this.personalDataDTO = new PersonalDataDTO();
+    this.personalDataDTO.id = 0;
+    this.personalDataDTO.roleId = this.roleId;
+    this.personalDataDTO.curp = curp.value;
 
-  phone!: string;
+    var bi = this.birthday.split('-');
 
-  cellphone!: string;
+    var date = new Date(parseInt(bi[0]),parseInt(bi[1]),parseInt(bi[2]));
 
-  roleId!: number;
+    this.personalDataDTO.birthday = date;
 
-  constructor(private rolesService: RolesService) {}
+    console.log(this.personalDataDTO);
+  }
+
   ngOnInit(): void {
+    this.setTitle('Bienvenido porfavor ingresa los datos del alumno');
+    const inputElement = document.getElementById('phone');
+    const inputElement2 = document.getElementById('phoneHome');
+    if(inputElement){
+      intlTelInput(inputElement,{
+        initialCountry: 'mx',
+        separateDialCode: true,
+        utilsScript: 'https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/utils.js'
+      });
+    }
+    if(inputElement2){
+      intlTelInput(inputElement2,{
+        initialCountry: 'mx',
+        separateDialCode: true,
+        utilsScript: 'https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/utils.js'
+      });
+    }
     var date = new Date();
     this.minDate = date.toISOString().substring(0, 10);
-    console.log(this.minDate);
-    this.setTitle('Alta de profesores');
-    // this.rolesService.getRoles().subscribe({});
-
+    this.birthday = this.minDate;
+    this.rolesService.getRoles().subscribe((response) => {
+      response.forEach((element) => {
+        if (element.value == 2) {
+          this.roleId = element.value;
+        }
+      });
+    });
   }
 
   public getTitle() {
@@ -57,12 +84,5 @@ export class ProfesorComponent implements OnInit {
 
   public setTitle(title: string) {
     this.title = title;
-  }
-
-  agregarProfesores(){
-    let persona = new PersonalDataDTO();
-    persona.seId(this.id);
-    this.profesores.push(persona);
-
   }
 }

@@ -1,43 +1,94 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { PersonalDataDTO } from 'src/app/dto/personal-data-dto';
+import { RolesService } from 'src/app/services/catalog/roles.service';
+import * as intlTelInput from 'intl-tel-input';
 
 @Component({
   selector: 'app-estudiante',
-  templateUrl: './estudiante.component.html'
+  templateUrl: './estudiante.component.html',
 })
 export class EstudianteComponent implements OnInit{
-
   private title!: string;
-  private flag!: boolean;
-
+  name: string;
   minDate!: String;
-  maxDate!: Date;
+  private roleId: number;
+  private personalDataDTO: PersonalDataDTO;
+  curp:String;
+  birthday: String;
   currentDateSelect!: Date;
+  motherLastName!: String;
+  lastName!: String;
+  phone!: string;
+  email!: String;
+  phoneHome!: String;
 
-  constructor(){
-
-
+  constructor(private rolesService: RolesService) {
   }
+
+
+  createUser(curp:HTMLInputElement){
+    console.log(this.name);
+    this.personalDataDTO = new PersonalDataDTO();
+    this.personalDataDTO.id = 0;
+    this.personalDataDTO.roleId = this.roleId;
+
+
+    var bi = this.birthday.split('-');
+
+    var date = new Date(parseInt(bi[0]),parseInt(bi[1]),parseInt(bi[2]));
+
+    this.personalDataDTO.birthday = date;
+
+    this.personalDataDTO.name = this.name;
+
+    this.personalDataDTO.lastName = this.lastName;
+
+    this.personalDataDTO.mothersLastName = this.motherLastName;
+
+    this.personalDataDTO.cellphone = this.phone;
+
+    this.personalDataDTO.phone = this.phoneHome;
+
+    this.personalDataDTO.curp = curp.value;
+
+    console.log(this.personalDataDTO);
+  }
+
   ngOnInit(): void {
-
+    this.setTitle('Bienvenido porfavor ingresa los datos del alumno');
+    const inputElement = document.getElementById('phone');
+    const inputElement2 = document.getElementById('phoneHome');
+    if(inputElement){
+      intlTelInput(inputElement,{
+        initialCountry: 'mx',
+        separateDialCode: true,
+        utilsScript: 'https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/utils.js'
+      });
+    }
+    if(inputElement2){
+      intlTelInput(inputElement2,{
+        initialCountry: 'mx',
+        separateDialCode: true,
+        utilsScript: 'https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/utils.js'
+      });
+    }
     var date = new Date();
-    this.minDate = date.toISOString().substring(0,10);
-    console.log(this.minDate);
-  // if(flag==true){
-  //   this.setTitle('Alta de Alumnos');
-
-  // }else{
-  //   this.setTitle('Actualización del Alumno');
-  // }
-
-
+    this.minDate = date.toISOString().substring(0, 10);
+    this.birthday = this.minDate;
+    this.rolesService.getRoles().subscribe((response) => {
+      response.forEach((element) => {
+        if (element.value == 2) {
+          this.roleId = element.value;
+        }
+      });
+    });
   }
 
-  public getTitle(){
+  public getTitle() {
     return this.title;
   }
 
-  public setTitle(title:string){
+  public setTitle(title: string) {
     this.title = title;
   }
-
 }
