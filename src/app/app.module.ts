@@ -26,6 +26,7 @@ import { HomeComponent } from './commons/home/home.component';
 import { HeaderControlComponent } from './commons/control/header-control/header-control.component';
 import { ListStudentBySearchService } from './services/catalog/list-student-by-search.service';
 import { InsertStudentServiceService } from './services/main/insert-student-service.service';
+import { ListPersonalDataService } from './services/catalog/list-personal-data.service';
 
 const routes: Routes = [
   { path: '', redirectTo:'/home', pathMatch: 'full'},
@@ -70,7 +71,8 @@ const routes: Routes = [
     RolesService,
     ListTeacherBySearchService,
     ListStudentBySearchService,
-    InsertStudentServiceService
+    InsertStudentServiceService,
+    ListPersonalDataService
   ],
   bootstrap: [AppComponent],
 })

@@ -48,7 +48,7 @@ export class PadresComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.setTitle('Bienvenido porfavor ingresa los datos del alumno');
+    this.setTitle('Bienvenido porfavor ingresa los datos del padre o tutor');
     const inputElement = document.getElementById('phone');
     const inputElement2 = document.getElementById('phoneHome');
     if(inputElement){

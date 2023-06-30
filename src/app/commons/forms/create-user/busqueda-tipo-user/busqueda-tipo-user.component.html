@@ -14,10 +14,10 @@
     </form>
     <div class="row col-sm-3">
       <div class="col-sm-11" *ngIf="value == 1">
-        <input type="button" class="form-control btn btn-outline-primary" id="alta" name="alta" value="Alta" [routerLink]="['/estudiante']"/>
+        <input type="button" class="form-control btn btn-outline-primary" id="alta" name="alta" value="Alta" [routerLink]="['/estudiante']" [state]="{flag:true}"/>
       </div>
       <div class="col-sm-11" *ngIf="value == 2">
-        <input type="button" class="form-control btn btn-outline-primary" id="alta" name="alta" value="Alta" [routerLink]="['/profesor']"/>
+        <input type="button" class="form-control btn btn-outline-primary" id="alta" name="alta" value="Alta" [routerLink]="['/profesor']" [state]="{flag:true}"/>
       </div>
     </div>
   </div>
@@ -32,6 +32,7 @@
           <th>Apellido paterno:</th>
           <th>Apellido materno:</th>
           <th>Curp:</th>
+          <th>Actualizar:</th>
         </tr>
       </thead>
       <tbody>
@@ -40,6 +41,14 @@
           <td>{{user.lastName}}</td>
           <td>{{user.mothersLastName}}</td>
           <td>{{user.curp}}</td>
+          <td>
+            <div class="col-sm-11" *ngIf="value == 1">
+              <button type="button" class="btn btn-success" [routerLink]="['/estudiante']" [state]="{flag:false, id:user.id}">Actualizar</button>
+            </div>
+            <div class="col-sm-11" *ngIf="value == 2">
+              <button type="button" class="btn btn-success" [routerLink]="['/profesor']" [state]="{flag:false, id:user.id}">Actualizar</button>
+            </div>
+        </td>
         </tr>
       </tbody>
     </table>

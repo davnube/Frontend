@@ -1,37 +1,36 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PersonalDataDTO } from 'src/app/dto/personal-data-dto';
 import { RolesService } from 'src/app/services/catalog/roles.service';
 import * as intlTelInput from 'intl-tel-input';
+import { ListPersonalDataService } from 'src/app/services/catalog/list-personal-data.service';
+import { ValueLong } from 'src/app/dto/value-long';
 
 @Component({
   selector: 'app-estudiante',
   templateUrl: './estudiante.component.html',
 })
 export class EstudianteComponent implements OnInit{
-  private title!: string;
+  private title: string;
   name: string;
-  minDate!: String;
-  private roleId: number;
+  minDate: String;
+  roleId: number;
   private personalDataDTO: PersonalDataDTO;
   curp:String;
   birthday: String;
-  currentDateSelect!: Date;
-  motherLastName!: String;
-  lastName!: String;
-  phone!: string;
-  email!: String;
-  phoneHome!: String;
+  currentDateSelect: Date;
+  motherLastName: String;
+  lastName: String;
+  phone: string;
+  email: String;
+  phoneHome: String;
+  valueLong:ValueLong;
 
-  constructor(private rolesService: RolesService) {
+
+  constructor(private rolesService: RolesService, private listPersonalDataService : ListPersonalDataService) {
   }
 
 
-  createUser(curp:HTMLInputElement){
-    console.log(this.name);
-    this.personalDataDTO = new PersonalDataDTO();
-    this.personalDataDTO.id = 0;
-    this.personalDataDTO.roleId = this.roleId;
-
+  createUser(){
 
     var bi = this.birthday.split('-');
 
@@ -49,12 +48,44 @@ export class EstudianteComponent implements OnInit{
 
     this.personalDataDTO.phone = this.phoneHome;
 
-    this.personalDataDTO.curp = curp.value;
+    this.personalDataDTO.curp = this.curp;
+
+    this.personalDataDTO.roleId = this.roleId;
 
     console.log(this.personalDataDTO);
   }
 
   ngOnInit(): void {
+    this.personalDataDTO = new PersonalDataDTO();
+    if(history.state.flag==true){
+      this.personalDataDTO.id = 0;
+
+    }else{
+      this.personalDataDTO.id = history.state.id;
+      this.valueLong = new ValueLong();
+      this.valueLong.value = history.state.id;
+
+
+      this.listPersonalDataService.getPersonalData(this.valueLong).subscribe((response) => {
+        this.name = response.name;
+        this.birthday = response.birthday;
+        this.lastName = response.lastName;
+        this.motherLastName = response.mothersLastName;
+        this.phone = response.cellphone;
+        this.phoneHome = response.phone;
+        this.email = response.email;
+        this.curp = response.curp;
+      });
+    }
+
+    this.rolesService.getRoles().subscribe((response) => {
+      response.forEach((element) => {
+        if (element.value == 2) {
+          this.roleId = element.value;
+        }
+      });
+    });
+
     this.setTitle('Bienvenido porfavor ingresa los datos del alumno');
     const inputElement = document.getElementById('phone');
     const inputElement2 = document.getElementById('phoneHome');
@@ -75,13 +106,7 @@ export class EstudianteComponent implements OnInit{
     var date = new Date();
     this.minDate = date.toISOString().substring(0, 10);
     this.birthday = this.minDate;
-    this.rolesService.getRoles().subscribe((response) => {
-      response.forEach((element) => {
-        if (element.value == 2) {
-          this.roleId = element.value;
-        }
-      });
-    });
+
   }
 
   public getTitle() {

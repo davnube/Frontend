@@ -29,7 +29,7 @@ export class ListStudentBySearchService {
     this.searchDTO.setSearch(this.getSearch());
     this.searchDTO.setNoPag(this.getNoPag());
 
-    return this.http.post(this.urlEndPoint, JSON.stringify(this.searchDTO), {headers: this.headers,})
+    return this.http.post(this.urlEndPoint, JSON.stringify(this.searchDTO), {headers: this.headers})
     .pipe(
       tap(()=>{
         this._refresh$.next();

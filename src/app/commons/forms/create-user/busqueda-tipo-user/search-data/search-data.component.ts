@@ -51,15 +51,17 @@ export class SearchData implements OnChanges, OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    console.log("El valor con cambio es: "+this.value);
     if (this.value == 1) {
       this.getUsersStudent(changes);
     } else {
-      this.getUsersStudent(changes);
+      console.log("Entre en teacher");
+      this.getUsersTeacher(changes);
     }
-    this.getUsersTeacher(changes);
+    //this.getUsersTeacher(changes);
   }
 
-  getUsersTeacher(changes: SimpleChanges): void {
+  getUsersStudent(changes: SimpleChanges): void {
     if (changes['search'].currentValue != undefined) {
       this.data = changes['search'].currentValue;
       this.listStudentBySearchService.setSearch(this.data);
@@ -71,7 +73,7 @@ export class SearchData implements OnChanges, OnInit {
     }
   }
 
-  getUsersStudent(changes: SimpleChanges): void {
+  getUsersTeacher(changes: SimpleChanges): void {
     if (changes['search'].currentValue != undefined) {
       this.data = changes['search'].currentValue;
       this.listTeacherBySearchService.setSearch(this.data);
@@ -82,4 +84,6 @@ export class SearchData implements OnChanges, OnInit {
       });
     }
   }
+
+
 }
