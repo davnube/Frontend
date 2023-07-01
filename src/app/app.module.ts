@@ -36,6 +36,7 @@ const routes: Routes = [
   { path: 'busquedaUser', component: BusquedaTipoUserComponent},
   { path: 'estudiante', component:EstudianteComponent},
   { path: 'profesor', component:ProfesorComponent},
+  { path: 'padres', component: PadresComponent}
 
 ];
 

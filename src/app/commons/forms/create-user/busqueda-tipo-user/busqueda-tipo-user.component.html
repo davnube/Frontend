@@ -33,6 +33,9 @@
           <th>Apellido materno:</th>
           <th>Curp:</th>
           <th>Actualizar:</th>
+          <div class="col-sm-11" *ngIf="value == 1">
+            <th>Alta de padres:</th>
+          </div>
         </tr>
       </thead>
       <tbody>
@@ -48,6 +51,11 @@
             <div class="col-sm-11" *ngIf="value == 2">
               <button type="button" class="btn btn-success" [routerLink]="['/profesor']" [state]="{flag:false, id:user.id}">Actualizar</button>
             </div>
+        </td>
+        <td>
+          <div class="col-sm-11" *ngIf="value == 1">
+            <button type="button" class="btn btn-success" [routerLink]="['/padres']" [state]="{flag:false, id:user.id}">Alta</button>
+          </div>
         </td>
         </tr>
       </tbody>

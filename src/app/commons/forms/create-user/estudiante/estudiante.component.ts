@@ -4,6 +4,8 @@ import { RolesService } from 'src/app/services/catalog/roles.service';
 import * as intlTelInput from 'intl-tel-input';
 import { ListPersonalDataService } from 'src/app/services/catalog/list-personal-data.service';
 import { ValueLong } from 'src/app/dto/value-long';
+//import Swal from 'sweetalert2/dist/sweetalert2.js';
+
 
 @Component({
   selector: 'app-estudiante',
